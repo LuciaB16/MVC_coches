@@ -1,6 +1,7 @@
 public class Controller {
+
     public static void main(String[] args) {
-        Model miModelo = new Model();
+        /*Model miModelo = new Model();
         View miVista = new View();
 
         // Crear tres coches
@@ -22,6 +23,26 @@ public class Controller {
         // recoje la velocidad y la muestra (tarea de la View)
         boolean hecho = miVista.muestraVelocidad("SBC 1234", miModelo.getVelocidad("SBC 1234"));
 
-        System.out.println(hecho);
+        System.out.println(hecho);*/
+
+
+        View.crearVentana();
     }
-}
+
+        public static void crearCoche(String modelo, String matricula) {
+            Coche aux = Model.crearCoche(modelo, matricula);
+            if (aux != null) {
+                View.mostrarVelocidad(aux.matricula, aux.velocidad);
+            }
+        }
+
+        public static void reducirVelocidad(String matricula, int v){
+                int aux= Model.bajarVelocidad(matricula,v);
+                View.mostrarVelocidad(matricula,aux);
+        }
+
+        public static void aumentarVelocidad(String matricula, int v){
+                int aux= Model.subirVelocidad(matricula,v);
+                View.mostrarVelocidad(matricula,aux);
+            }
+    }
