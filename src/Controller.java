@@ -1,6 +1,14 @@
 public class Controller {
 
+    /**
+     * Método main a través del cual llamo a la View para ver la ventana     *
+     * @param args
+     */
     public static void main(String[] args) {
+
+        View.crearVentana();
+
+
         /*Model miModelo = new Model();
         View miVista = new View();
 
@@ -25,24 +33,38 @@ public class Controller {
 
         System.out.println(hecho);*/
 
-
-        View.crearVentana();
     }
 
-        public static void crearCoche(String modelo, String matricula) {
-            Coche aux = Model.crearCoche(modelo, matricula);
-            if (aux != null) {
-                View.mostrarVelocidad(aux.matricula, aux.velocidad);
-            }
-        }
 
-        public static void reducirVelocidad(String matricula, int v){
-                int aux= Model.bajarVelocidad(matricula,v);
-                View.mostrarVelocidad(matricula,aux);
+    /**
+     * Método que crea un coche y muestra su velocidad según modelo y matricula     *
+     * @param modelo    del coche
+     * @param matricula del coche
+     */
+    public static void crearCoche(String modelo, String matricula) {
+        Coche aux = Model.crearCoche(modelo, matricula);
+        if (aux != null) {
+            View.mostrarVelocidad(aux.matricula, aux.velocidad);
         }
-
-        public static void aumentarVelocidad(String matricula, int v){
-                int aux= Model.subirVelocidad(matricula,v);
-                View.mostrarVelocidad(matricula,aux);
-            }
     }
+
+    /**
+     * Método que reduce la velocidad según la matricula y la velocidad recibida (llama a Model para bajarla y la muestra con View)
+     * @param matricula del coche
+     * @param v velocidad a reducir
+     */
+    public static void reducirVelocidad(String matricula, int v) {
+        int aux = Model.bajarVelocidad(matricula, v);
+        View.mostrarVelocidad(matricula, aux);
+    }
+
+    /**
+     * Método que aumenta la velocidad según la matricula y la velocidad recibida (llama a Model para subirla y la muestra con View)
+     * @param matricula del coche
+     * @param v velocidad a aumentar
+     */
+    public static void aumentarVelocidad(String matricula, int v) {
+        int aux = Model.subirVelocidad(matricula, v);
+        View.mostrarVelocidad(matricula, aux);
+    }
+}

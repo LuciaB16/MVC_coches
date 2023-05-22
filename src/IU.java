@@ -11,9 +11,11 @@ public class IU {
     private JTextField textMatricula;
     private JLabel etqMatricula;
     private JLabel etqModelo;
+    
 
-
-
+    /**
+     * Constructor por defecto de la clase IU donde inicializamos los botones y les añadimos ActionListener a cada uno
+     */
     public IU(){
 
         bCrearCoche.addActionListener(new ActionListener() {
@@ -39,6 +41,9 @@ public class IU {
     }
 
 
+    /**
+     * Método para instanciar la ventana y visualizarla
+     */
     public static void crearVentana(){
         JFrame frame = new JFrame("MVC Coches");
         frame.setContentPane(new IU().panel1);

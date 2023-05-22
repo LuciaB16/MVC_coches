@@ -2,10 +2,14 @@ import java.util.ArrayList;
 
 public class Model {
 
+    /**
+     * Creo un ArrayList de tipo Coche para guardar los coches que se vayan creando
+     */
     static ArrayList<Coche> parking = new ArrayList<>();
 
+
     /**
-     * Crea un coche y lo mete en el parking
+     * Crea un coche y lo mete en ArrayList parking
      * @param modelo del coche
      * @param matricula identificador unico
      * @return el coche creado
@@ -17,9 +21,9 @@ public class Model {
     }
 
     /**
-     * Busca coche segun matricula
+     * Método que busca un coche según la matrícula recibida
      * @param matricula a buscar
-     * @return chche o null si no existe
+     * @return coche o null si no existe
      */
     public static Coche getCoche(String matricula){
         Coche aux = null;
@@ -34,7 +38,7 @@ public class Model {
 
 
     /**
-     *
+     * Método que cambia la velocidad
      * @param matricula
      * @param v nueva velocidad
      * @return velocidad modificada
@@ -51,10 +55,10 @@ public class Model {
 
 
     /**
-     * Devuelve la velocidad segun la matricula
-     * @param matricula
-     * @param v velocidad a aumentar
-     * @return  velocidad aumentada
+     * Método que sube la velocidad de un coche según la matrícula y velocidad recibidas
+     * @param matricula del coche
+     * @param v velocidad a subir
+     * @return velocidad aumentada
      */
 
     public static Integer subirVelocidad (String matricula, int v){
@@ -63,9 +67,9 @@ public class Model {
     }
 
     /**
-     * Devuelve la velocidad segun la matricula
-     * @param matricula
-     * @param v velocidad a disminuir
+     * Método que reduce la velocidad de un coche según la matrícula y velocidad recibidas
+     * @param matricula del coche
+     * @param v velocidad a bajar
      * @return velocidad reducida
      */
     public static Integer bajarVelocidad (String matricula, int v){
@@ -75,9 +79,9 @@ public class Model {
 
 
     /**
-     * Devuelve la velocidad segun la matricula
-     * @param matricula
-     * @return
+     * Método que devuelve la velocidad de un coche según la matrícula recibida
+     * @param matricula del coche
+     * @return la velocidad del coche
      */
     public static Integer getVelocidad(String matricula) {
         return getCoche(matricula).velocidad;
