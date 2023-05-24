@@ -1,7 +1,7 @@
 # Arquitectura MVC
 
-Aplicación que trabaja con objetos coches,los crea, modifica la velocidad y la muestra.
-
+Aplicación que trabaja con objetos coches, los crea, modifica la velocidad y la muestra.
+Añadimos método para buscar un coche.
 ---
 ## Diagrama de clases:
 
@@ -16,7 +16,8 @@ classDiagram
           +main()
       }
       class View {
-      +muestraVelocidad(String, Integer)
+      +mostrarVelocidad(String, Integer)
+      +mostrarCoche(String matricula, String modelo, Integer v)
       }
       class Model {
           ArrayList~Coche~: parking
@@ -93,6 +94,19 @@ sequenceDiagram
     deactivate Controller
     View-->>User: Listo, la velocidad de tu coche se ha reducido
     deactivate View
+    
+    User->>View: Quiero buscar un coche
+    activate View
+    View-->>Controller: El User quiere buscar un coche
+    activate Controller
+    Controller->>Model: Puedes buscar un coche?
+    activate Model
+    Model-->>Controller: Aquí tienes el coche buscado
+    deactivate Model
+    Controller-->>View: Coche encontrado!
+    deactivate Controller
+    View-->>User: Listo, tu coche se ha encontrado
+    deactivate View
 ```
 
 El mismo diagrama con los nombres de los métodos.
@@ -136,6 +150,17 @@ sequenceDiagram
     Model-->>Controller: El coche con la velocidad reducida
     deactivate Model
     Controller-->>+View: mostrarVelocidad(matricula,velocidad)
+    deactivate Controller
+    View-->>-Dialog: crearDialog(mensaje)
+    
+    User-->>IU: Busca un coche
+    IU-->Controller: buscarCoche(matricula)
+    activate Controller       
+    Controller->>Model: getCoche(matricula)
+    activate Model
+    Model-->>Controller: El coche buscado
+    deactivate Model
+    Controller-->>+View: mostrarCoche(matricula,modelo,v)
     deactivate Controller
     View-->>-Dialog: crearDialog(mensaje)
     
