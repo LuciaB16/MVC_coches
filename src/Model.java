@@ -29,6 +29,7 @@ public class Model {
         Coche aux = null;
         // recorre el array buscando por matricula
         for (Coche e: parking) {
+            //si la matricula es del coche que le introdujimos, lo devuelve (busca el coche por matricula)
             if (e.matricula.equals(matricula)) {
                 aux = e;
             }
