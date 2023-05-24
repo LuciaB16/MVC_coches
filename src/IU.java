@@ -11,7 +11,8 @@ public class IU {
     private JTextField textMatricula;
     private JLabel etqMatricula;
     private JLabel etqModelo;
-    
+    private JButton bBuscarCoche;
+
 
     /**
      * Constructor por defecto de la clase IU donde inicializamos los botones y les añadimos ActionListener a cada uno
