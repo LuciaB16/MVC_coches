@@ -1,5 +1,8 @@
 public class Controller {
 
+    //El patrón Observer en Java nos exige instanciar la clase Observable
+    static Model miModelo = new Model();
+
     /**
      * Método main a través del cual llamo a la View para ver la ventana     *
      * @param args
@@ -7,6 +10,10 @@ public class Controller {
     public static void main(String[] args) {
 
         View.crearVentana();
+
+        //Instanciamos al observador
+        ObserverVelocidad observarV = new ObserverVelocidad();
+        miModelo.addObserver(observarV);
 
 
         /*Model miModelo = new Model();
@@ -38,7 +45,7 @@ public class Controller {
 
     /**
      * Método que crea un coche y muestra su velocidad según modelo y matricula     *
-     * @param modelo    del coche
+     * @param modelo del coche
      * @param matricula del coche
      */
     public static void crearCoche(String modelo, String matricula) {
@@ -53,9 +60,8 @@ public class Controller {
      * @param matricula del coche
      * @param v velocidad a reducir
      */
-    public static void reducirVelocidad(String matricula, int v) {
-        int aux = Model.bajarVelocidad(matricula, v);
-        View.mostrarVelocidad(matricula, aux);
+    public static void reducirVelocidad(String matricula, Integer v) {
+        miModelo.bajarVelocidad(matricula,v);
     }
 
     /**
@@ -63,8 +69,7 @@ public class Controller {
      * @param matricula del coche
      * @param v velocidad a aumentar
      */
-    public static void aumentarVelocidad(String matricula, int v) {
-        int aux = Model.subirVelocidad(matricula, v);
-        View.mostrarVelocidad(matricula, aux);
+    public static void aumentarVelocidad(String matricula, Integer v) {
+        miModelo.subirVelocidad(matricula,v);
     }
 }

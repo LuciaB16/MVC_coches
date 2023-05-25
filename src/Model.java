@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Model {
+public class Model extends Observable {
 
     /**
      * Creo un ArrayList de tipo Coche para guardar los coches que se vayan creando
@@ -38,21 +39,29 @@ public class Model {
 
 
     /**
-     * Método que cambia la velocidad
+     * Método que cambia la velocidad, y que por lo tanto,
+     * tendrá que avisar al controlador de dicho cambio
      * @param matricula
      * @param v nueva velocidad
      * @return velocidad modificada
      */
     /*
-     public Integer cambiarVelocidad(String matricula, Integer v) {
+     public void cambiarVelocidad(String matricula, Integer v) {
         // busca el coche
         getCoche(matricula).velocidad = v;
+
+        //Anotamos el cambio
+         setChanged();
+         //Lo notificamos a todos los observadores
+         notifyObservers(getCoche(matricula));
+
+         //ya no retornamos la nueva velocidad porque vamos a utilizar el patron observer
+
         // retorna la nueva velocidad
-        return getCoche(matricula).velocidad;
+        //return getCoche(matricula).velocidad;
     }
-    */
 
-
+*/
 
     /**
      * Método que sube la velocidad de un coche según la matrícula y velocidad recibidas
@@ -61,9 +70,10 @@ public class Model {
      * @return velocidad aumentada
      */
 
-    public static Integer subirVelocidad (String matricula, int v){
+    public void subirVelocidad (String matricula, Integer v){
         getCoche(matricula).velocidad=getCoche(matricula).velocidad+v;
-        return getCoche(matricula).velocidad;
+        setChanged();
+        notifyObservers(getCoche(matricula));
     }
 
     /**
@@ -72,9 +82,10 @@ public class Model {
      * @param v velocidad a bajar
      * @return velocidad reducida
      */
-    public static Integer bajarVelocidad (String matricula, int v){
+    public void bajarVelocidad (String matricula, Integer v){
         getCoche(matricula).velocidad=getCoche(matricula).velocidad-v;
-        return getCoche(matricula).velocidad;
+        setChanged();
+        notifyObservers(getCoche(matricula));
     }
 
 
