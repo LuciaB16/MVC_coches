@@ -15,6 +15,9 @@ public class Controller {
         ObserverVelocidad observarV = new ObserverVelocidad();
         miModelo.addObserver(observarV);
 
+        //Instanciamos un segundo observador
+        ObserverOtro otroObs = new ObserverOtro();
+        miModelo.addObserver(otroObs);
 
         /*Model miModelo = new Model();
         View miVista = new View();
