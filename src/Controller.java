@@ -15,9 +15,13 @@ public class Controller {
         ObserverVelocidad observarV = new ObserverVelocidad();
         miModelo.addObserver(observarV);
 
+        //Instanciamos al observador con el exceso de velocidad
+        ObsExceso obsExcesoV = new ObsExceso();
+        miModelo.addObserver(obsExcesoV);
+
         //Instanciamos un segundo observador
-        ObserverOtro otroObs = new ObserverOtro();
-        miModelo.addObserver(otroObs);
+        /*ObserverOtro otroObs = new ObserverOtro();
+        miModelo.addObserver(otroObs);*/
 
         /*Model miModelo = new Model();
         View miVista = new View();
