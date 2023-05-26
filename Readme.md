@@ -47,7 +47,12 @@ classDiagram
       class ObserverVelocidad {
       +update()
       }
+      
+      class ObsExceso {
+      +update()
+      }
     Controller "1" *-- "1" ObserverVelocidad : association
+    Controller "1" *-- "1" ObsExceso : association
     Controller "1" *-- "1" Model : association
     Controller "1" *-- "1" View : association
     Model "1" *-- "1..n" Coche : association
@@ -68,6 +73,7 @@ sequenceDiagram
     participant View
     participant Controller
     participant ObserverVelocidad
+    participant ObsExceso
     participant Model
     
     user-->>View: Crea el coche
@@ -111,6 +117,21 @@ sequenceDiagram
     deactivate Controller
     View-->>user: Listo, la velocidad de tu coche se ha reducido! 
     deactivate View
+    
+    user-->>View: Quiero controlar la velocidad
+    activate View
+    View-->>Controller: El User quiere controlar la velocidad
+    activate Controller
+    Controller->>Model: Puedes controlar la velocidad?
+    activate Model
+    Model-->>ObsExceso: Notificación de exceso de velocidad
+    deactivate Model
+    activate ObsExceso
+    ObsExceso-->>+View: Muestra el aviso de exceso de velocidad
+    deactivate ObsExceso
+    deactivate Controller
+    View-->>user: Listo, el exceso de velocidad de tu coche se ha mostrado! 
+    deactivate View
 ```
 
 El mismo diagrama con los nombres de los métodos
@@ -122,6 +143,7 @@ sequenceDiagram
         participant View
         participant Controller
         participant ObserverVelocidad
+        participant ObsExceso
         participant Model
     
     user-->>IU: Crea el coche
@@ -161,34 +183,20 @@ sequenceDiagram
     deactivate Controller
     View-->>-Dialog: crearDialog(mensaje)
     
-   ```
-Si sumamos otro observador, entonces el `update()` será en paralelo (**par**)
-a todos los Observadores.
-```mermaid
-sequenceDiagram
-    participant View
-    participant Controller
-    participant ObserverVelocidad
-    participant ObserverOtro
-    participant Model
-
-    Controller->>Model: cambiarVelocidad()
+    user-->>IU: Controla la velocidad del coche
+    IU-->>Controller: aumentarVelocidad(matricula,velocidad)
+    activate Controller
+    Controller->>Model: aumentarVelocidad(matricula,velocidad)
     activate Model
-    par notificacion
-        Model->>ObserverVelocidad: update()
-    and notificacion
-        Model->>ObserverOtro: update()
-        end
+    Model-->>ObsExceso: update()
     deactivate Model
-    activate ObserverVelocidad
-    activate ObserverOtro
-    ObserverVelocidad->>+View: muestraVelocidad
-    deactivate ObserverVelocidad
-    ObserverOtro->>-ObserverOtro: sout
-    activate View
-    View->>-View: sout
-    deactivate View
-```
+    activate ObsExceso
+    ObsExceso-->>+View: excesoVelocidad(matricula, velocidad)
+    deactivate ObsExceso
+    deactivate Controller
+    View-->>-Dialog: crearDialog(mensaje)
+    
+   ```
 
 ---
 ## Pasos para la configuración.
